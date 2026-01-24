@@ -1,0 +1,58 @@
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "studentdb";
+
+$conn = new mysqli("Localhost", "krishna", "", "studentdb");
+if ($conn->connect_error) {
+    error_log("Database connection failed: " . $conn->connect_error);
+    die("Connection failed. Please try again later.");
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $roll = trim($_POST['roll'] ?? '');
+    $fullname = trim($_POST['fullname'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password_plain = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
+    $contact = trim($_POST['contact'] ?? '');
+    $stream = $_POST['stream'] ?? '';
+
+    if (empty($roll) || empty($fullname) || empty($email) || empty($password_plain) || empty($contact) || empty($stream)) {
+        header('Location: ../Templates/register.html?error=missing_fields');
+        exit;
+    }
+
+    if ($password_plain !== $confirm_password) {
+        header('Location: ../Templates/register.html?error=password_mismatch');
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header('Location: ../Templates/register.html?error=invalid_email');
+        exit;
+    }
+
+    $password_hash = password_hash($password_plain, PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("INSERT INTO studentdata (roll, fullname, email, password, contact, stream) VALUES (?, ?, ?, ?, ?, ?)");
+    if (!$stmt) {
+        error_log('Prepare failed: ' . $conn->error);
+        header('Location: ../Templates/register.html?error=server_error');
+        exit;
+    }
+
+    $stmt->bind_param('ssssss', $roll, $fullname, $email, $password_hash, $contact, $stream);
+    if ($stmt->execute()) {
+        $stmt->close();
+        header('Location: ../Templates/login.html?registered=1');
+        exit;
+    } else {
+        error_log('Insert failed: ' . $stmt->error);
+        $stmt->close();
+        header('Location: ../Templates/register.html?error=insert_failed');
+        exit;
+    }
+}
+
+$conn->close();

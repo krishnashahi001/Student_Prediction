@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../Design/style.css">
+</head>
+<body class="admin-bgcolor">
+    <nav>
+        <div class="nav-left">
+            <button onclick="navigateTo('Index.html')"> 
+                <img src="../components/icons/home.png" class="icon"> Home </button>
+        </div>
+        <div class="nav-right">
+            <button> <img src="../components/icons/signout.png" class="icon">Sign out</button>
+        </div>
+    </nav>
+    
+    
+    <main>
+        <h2>Admin Dashboard</h2>
+        <p>Manage users, view analytics, and oversee the system.</p>
+        <div>
+         <button onclick="navigateTo('insight.html')" class="admin-buttons">View Insights</button>
+         <br>
+         <br>
+         <button onclick="navigateTo('insight.html')" class="admin-buttons">Manage users</button>
+        </div>
+        
+    </main>
+
+    <script src="../JavaScript/script.js"></script>
+</body>
+</html>

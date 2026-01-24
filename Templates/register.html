@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../Design/style.css">
+</head>
+<body>
+    <nav>
+         <div class="nav-left">
+            <button onclick="navigateTo('../templates/Index.html')"> 
+                <img src="../components/icons/home.png" class="icon"> Home </button>
+
+        </div>
+        <div class="nav-right">
+            <button onclick="navigateTo('register.html')">
+                <img src="../components/icons/register.png" class="icon">Register</button>
+            <button onclick="navigateTo('login.html')">
+                <img src="../components/icons/login.png" class="icon">Login</button>
+
+        </div>
+    </nav>
+    
+    <main>
+        <h2>Register</h2>
+        <form id="registerForm" action="../Backend/store.php" method="POST" autocomplete="off">
+            <input id="roll" name="roll" type="Number" placeholder="Roll Number" required >
+            <input id="fullname" name="fullname" type="text" placeholder="Full Name" required >
+            <input id="email" name="email" type="email" placeholder="Email" required >
+            <input id="password" name="password" type="password" placeholder="Password" required>
+            <input id="confirm_password" name="confirm_password" type="password" placeholder="Confirm Password" required >
+            <!-- inline password error message -->
+            <div id="passwordError" class="form-error" role="alert" aria-live="polite" style="display:none;"></div>
+            <input id="contact" name="contact" type="Number" placeholder="Contact Number" required autocomplete="off">
+           
+            <label for="stream"> Choose Stream:</label>
+            <select id="stream" name="stream" required>
+                <option value="" >Select your stream</option>
+                <option value="bsc_it">Bsc.IT</option>
+                <option value="bsc_cs">Bsc.CS</option>
+                <option value="bcom">B.Com</option>
+                <option value="bms">BMS</option>
+            </select>
+            <button type="submit" >Register</button>
+        </form>
+        <!-- small prompt under the form to navigate to login -->
+        <div class="form-footer">
+            <p>Already have an account? <a href="../backend/login-page.php">Login</a></p>
+        </div>
+    </main>
+    
+    <script src="../JavaScript/script.js"></script>
+</body>
+</html>

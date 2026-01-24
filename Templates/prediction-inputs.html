@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Prediction</title>
+    <link rel="stylesheet" href="../Design/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+          <button onclick="navigateTo('../backend/user-profile.php')"> 
+                <img src="../components/icons/home.png" class="icon"> Home </button>
+        </div>
+        <div class="nav-right">
+            <button onclick="navigateTo('../templates/index.html')"> <img src="../components/icons/signout.png" class="icon">Sign out</button>
+        </div>
+    </nav>
+    
+    <main>
+        <h2> Performance Prediction</h2>
+        <b>Enter data to predict Your Performance</b>
+        <br>    
+        <br>    
+        <form id="predictionForm" action="../templates/prediction.html" method="POST">
+           <label> Enter Past Score % : </label>
+           <input type="text" name="last-marks" placeholder="0.0" required>
+           <label> Enter Assignment Submitted in Last-Semester : </label>
+           <input type="text" name="last-assignment" placeholder="0" required>
+           <label> Enter Percentage of Attendence in Last-Semester :  </label>
+           <input type="text" name="last-attendence" placeholder="0.0 " required>
+           <label> Enter Current Semester Attendence Percentage : </label>
+           <input type="text" name="current-attendence" placeholder="0.0 " required>
+           <label> Enter Current Assignments Submitted : </label>
+           <input type="text" name="current-assignment" placeholder="0" required>
+          <button onclick="analyzePerformance()"><img src="../components/icons/analyse.png" class="icon" >Analysis </button>
+        </form>
+       </main>
+    <script src="../JavaScript/script.js"></script>
+</body>
+</html>
