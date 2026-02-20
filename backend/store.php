@@ -82,6 +82,17 @@ $confirm_password = $_POST['confirm_password'] ?? '';
 $contactno = $_POST['contact'] ?? '';
 $stream = $_POST['stream'] ?? '';
 
+// server expects full number with +91 prefix; strip spaces and other non‑digit/plus
+$contactno = preg_replace('/[^\d\+]/', '', $contactno);
+// ensure it begins with +91
+if (strpos($contactno, '+91') !== 0) {
+    // try to recover by prepending if missing
+    $clean = preg_replace('/[^\d]/', '', $contactno);
+    if (strlen($clean) === 10) {
+        $contactno = '+91' . $clean;
+    }
+}
+
 // Empty field validation
 if (empty($rollno) || empty($fullname) || empty($email) ||
     empty($password_plain) || empty($confirm_password) ||
@@ -111,11 +122,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     );
 }
 
-// Contact number validation (must be exactly 10 digits)
-if (!preg_match('/^[0-9]{10}$/', $contactno)) {
+// Contact number validation: must start with +91 followed by 10 digits starting 6-9
+if (!preg_match('/^\+91[6-9][0-9]{9}$/', $contactno)) {
     displayErrorPage(
         "Registration Failed",
-        "Contact number must be exactly 10 digits.",
+        "Enter the correct number.",
         "Templates/register.html"
     );
 }

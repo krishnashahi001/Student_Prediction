@@ -29,13 +29,13 @@
             <input id="roll" name="roll" type="text" placeholder="Roll Number" required pattern="[0-9A-Za-z-]+" maxlength="20" title="Enter your roll number as provided" autocomplete="off">
             <input id="fullname" name="fullname" type="text" placeholder="Full Name" required >
             <input id="email" name="email" type="email" placeholder="Email" required >
+            <!-- contact input pre‑filled with +91; user enters remaining 10 digits starting 6‑9 -->
+            <input id="contact" name="contact" type="text" placeholder="+91XXXXXXXXXX" value="+91" pattern="^\+91[6-9][0-9]{9}$" maxlength="13" required autocomplete="off">
+            <div id="contactError" class="form-error" role="alert" aria-live="polite">Enter the correct number</div>
             <input id="password" name="password" type="password" placeholder="Password" required>
             <input id="confirm_password" name="confirm_password" type="password" placeholder="Confirm Password" required >
             <!-- inline password error message -->
             <div id="passwordError" class="form-error" role="alert" aria-live="polite"></div>
-            <input id="contact" name="contact" type="text" placeholder="Contact Number" pattern="[0-9]{10}" maxlength="10" required autocomplete="off">
-            <div id="contactError" class="form-error" role="alert" aria-live="polite">Contact number must be exactly 10 digits</div>
-           
             <label for="stream"> Choose Stream:</label>
             <select id="stream" name="stream" required>
                 <option value="" >Select your stream</option>

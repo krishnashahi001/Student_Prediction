@@ -124,8 +124,15 @@ window.addEventListener('error', function(event) {
 });
 
 // helper functions that don't depend on DOM can go here
+function setCaretPosition(el, pos) {
+    if (el.setSelectionRange) {
+        el.setSelectionRange(pos, pos);
+    }
+}
+
 function isValidContact(val) {
-    return /^[7-9][0-9]{9}$/.test(val);
+    // expect +91 followed by 10 digits starting 6-9
+    return /^\+91[6-9][0-9]{9}$/.test(val);
 }
 
 function validateRegistrationFields(e) {
@@ -161,8 +168,7 @@ function validateRegistrationFields(e) {
 
     // contact restrictions
     if (contactInput) {
-        let val = contactInput.value.replace(/[^0-9]/g, '');
-        contactInput.value = val; // sanitize
+        let val = contactInput.value;
         if (!isValidContact(val)) {
             if (contactError) contactError.style.display = 'block';
             contactInput.focus();
@@ -171,8 +177,6 @@ function validateRegistrationFields(e) {
         } else if (contactError) {
             contactError.style.display = 'none';
         }
-        // prefix international code when sending
-        contactInput.value = '+91' + val;
     }
 
     return true;
@@ -180,6 +184,7 @@ function validateRegistrationFields(e) {
 
 // registration-specific handlers
 function handleRegistrationSubmit(e) {
+    // contact already contains +91 prefix; do not modify it
     const pwdEl = document.getElementById('password');
     const confirmEl = document.getElementById('confirm_password');
     const errorEl = document.getElementById('passwordError');
@@ -301,9 +306,32 @@ function initializePage() {
         const contactInput = document.getElementById('contact');
         const contactError = document.getElementById('contactError');
         if (contactInput) {
+            // ensure prefix exists on load
+            if (!contactInput.value || !contactInput.value.startsWith('+91')) {
+                contactInput.value = '+91';
+            }
+
+            contactInput.addEventListener('focus', () => {
+                if (!contactInput.value.startsWith('+91')) {
+                    contactInput.value = '+91';
+                }
+                // move cursor after prefix
+                setCaretPosition(contactInput, contactInput.value.length);
+            });
+
             contactInput.addEventListener('input', () => {
-                let val = contactInput.value.replace(/[^0-9]/g, '');
+                let val = contactInput.value;
+                // force prefix
+                if (!val.startsWith('+91')) {
+                    // strip any stray plus or 91
+                    val = '+91' + val.replace(/\+/g, '').replace(/^91/, '');
+                }
+                // keep only digits after prefix
+                let after = val.slice(3).replace(/\D/g, '');
+                if (after.length > 10) after = after.slice(0, 10);
+                val = '+91' + after;
                 contactInput.value = val;
+
                 if (!isValidContact(val)) {
                     if (contactError) contactError.style.display = 'block';
                 } else {
