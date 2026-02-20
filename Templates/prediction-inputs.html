@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Performance Prediction</title>
-    <link rel="stylesheet" href="../Design/style.css">
+    <base href="/sppa/">
+    <link rel="stylesheet" href="Design/style.css">
 </head>
 <body>
     <nav>
         <div class="nav-left">
-          <button onclick="navigateTo('../backend/user-profile.php')"> 
-                <img src="../components/icons/home.png" class="icon"> Home </button>
+          <button onclick="navigateTo('backend/user-profile.php')"> 
+                <img src="components/icons/profile.png" class="icon"> Profile </button>
         </div>
         <div class="nav-right">
-            <button onclick="navigateTo('../templates/index.html')"> <img src="../components/icons/signout.png" class="icon">Sign out</button>
+            <button onclick="navigateTo('Templates/Index.html')"> <img src="components/icons/signout.png" class="icon">Sign out</button>
         </div>
     </nav>
     
@@ -22,20 +23,48 @@
         <b>Enter data to predict Your Performance</b>
         <br>    
         <br>    
-        <form id="predictionForm" action="../templates/prediction.html" method="POST">
+        <form id="predictionForm">
            <label> Enter Past Score % : </label>
-           <input type="text" name="last-marks" placeholder="0.0" required>
+           <input type="number" id="last-marks" placeholder="0.0" step="0.1" required>
            <label> Enter Assignment Submitted in Last-Semester : </label>
-           <input type="text" name="last-assignment" placeholder="0" required>
+           <input type="number" id="last-assignment" placeholder="0" required>
            <label> Enter Percentage of Attendence in Last-Semester :  </label>
-           <input type="text" name="last-attendence" placeholder="0.0 " required>
+           <input type="number" id="last-attendence" placeholder="0.0 " step="0.1" required>
            <label> Enter Current Semester Attendence Percentage : </label>
-           <input type="text" name="current-attendence" placeholder="0.0 " required>
+           <input type="number" id="current-attendence" placeholder="0.0 " step="0.1" required>
            <label> Enter Current Assignments Submitted : </label>
-           <input type="text" name="current-assignment" placeholder="0" required>
-          <button onclick="analyzePerformance()"><img src="../components/icons/analyse.png" class="icon" >Analysis </button>
+           <input type="number" id="current-assignment" placeholder="0" required>
+           <label> Weekly Study Hours (optional): </label>
+           <input type="number" id="study-hours" placeholder="0" step="0.1">
+           <label> Previous GPA (optional, e.g., 0-10 or 0-4): </label>
+           <input type="number" id="previous-gpa" placeholder="0" step="0.1">
+           <label> Lab/Practical Score (0-100, optional): </label>
+           <input type="number" id="lab-score" placeholder="0" step="0.1" min="0" max="100">
+          <button type="button" onclick="submitPrediction()"><img src="components/icons/analyse.png" class="icon" >Analysis </button>
         </form>
        </main>
-    <script src="../JavaScript/script.js"></script>
+    <script src="javascript/script.js"></script>
+    <script>
+        function submitPrediction() {
+            const lastMarks = document.getElementById('last-marks').value;
+            const lastAssignment = document.getElementById('last-assignment').value;
+            const lastAttendence = document.getElementById('last-attendence').value;
+            const currentAttendence = document.getElementById('current-attendence').value;
+            const currentAssignment = document.getElementById('current-assignment').value;
+            const studyHours = document.getElementById('study-hours').value;
+            const previousGPA = document.getElementById('previous-gpa').value;
+
+            const params = new URLSearchParams();
+            params.append('lastMarks', lastMarks);
+            params.append('lastAssignment', lastAssignment);
+            params.append('lastAttendence', lastAttendence);
+            params.append('currentAttendence', currentAttendence);
+            params.append('currentAssignment', currentAssignment);
+            params.append('studyHoursPerWeek', studyHours);
+            params.append('previousGPA', previousGPA);
+
+            window.location.href = `Templates/prediction.html?${params.toString()}`;
+        }
+    </script>
 </body>
 </html>

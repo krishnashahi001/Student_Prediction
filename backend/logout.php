@@ -12,6 +12,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 
 /* Redirect to login page */
-header("Location: ../backend/login-page.php");
+header("Location: /sppa/backend/login-page.php");
 exit;
 ?>

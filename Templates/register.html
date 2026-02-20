@@ -4,35 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="../Design/style.css">
+    <base href="/sppa/">
+    <link rel="stylesheet" href="Design/style.css">
 </head>
 <body>
     <nav>
          <div class="nav-left">
-            <button onclick="navigateTo('../templates/Index.html')"> 
-                <img src="../components/icons/home.png" class="icon"> Home </button>
+            <button onclick="navigateTo('Templates/Index.html')"> 
+                <img src="components/icons/home.png" class="icon"> Home </button>
 
         </div>
         <div class="nav-right">
-            <button onclick="navigateTo('register.html')">
-                <img src="../components/icons/register.png" class="icon">Register</button>
-            <button onclick="navigateTo('login.html')">
-                <img src="../components/icons/login.png" class="icon">Login</button>
+            <button onclick="navigateTo('Templates/register.html')">
+                <img src="components/icons/register.png" class="icon">Register</button>
+            <button onclick="navigateTo('backend/login-page.php')">
+                <img src="components/icons/login.png" class="icon">Login</button>
 
         </div>
     </nav>
     
     <main>
         <h2>Register</h2>
-        <form id="registerForm" action="../Backend/store.php" method="POST" autocomplete="off">
-            <input id="roll" name="roll" type="Number" placeholder="Roll Number" required >
+        <form id="registerForm" action="backend/store.php" method="POST" autocomplete="off">
+            <input id="roll" name="roll" type="text" placeholder="Roll Number" required pattern="[0-9A-Za-z-]+" maxlength="20" title="Enter your roll number as provided" autocomplete="off">
             <input id="fullname" name="fullname" type="text" placeholder="Full Name" required >
             <input id="email" name="email" type="email" placeholder="Email" required >
             <input id="password" name="password" type="password" placeholder="Password" required>
             <input id="confirm_password" name="confirm_password" type="password" placeholder="Confirm Password" required >
             <!-- inline password error message -->
-            <div id="passwordError" class="form-error" role="alert" aria-live="polite" style="display:none;"></div>
-            <input id="contact" name="contact" type="Number" placeholder="Contact Number" required autocomplete="off">
+            <div id="passwordError" class="form-error" role="alert" aria-live="polite"></div>
+            <input id="contact" name="contact" type="text" placeholder="Contact Number" pattern="[0-9]{10}" maxlength="10" required autocomplete="off">
+            <div id="contactError" class="form-error" role="alert" aria-live="polite">Contact number must be exactly 10 digits</div>
            
             <label for="stream"> Choose Stream:</label>
             <select id="stream" name="stream" required>
@@ -46,10 +48,10 @@
         </form>
         <!-- small prompt under the form to navigate to login -->
         <div class="form-footer">
-            <p>Already have an account? <a href="../backend/login-page.php">Login</a></p>
+            <p>Already have an account? <a href="backend/login-page.php">Login</a></p>
         </div>
     </main>
     
-    <script src="../JavaScript/script.js"></script>
+    <script src="javascript/script.js"></script>
 </body>
 </html>

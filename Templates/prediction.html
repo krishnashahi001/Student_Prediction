@@ -3,40 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Performance Prediction</title>
-    <link rel="stylesheet" href="../Design/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/sppa/">
+    <link rel="stylesheet" href="Design/style.css">
 </head>
 <body>
 
 <nav>
     <div class="nav-left">
-        <button onclick="navigateTo('../Backend/user-profile.php')">
-            <img src="../components/icons/home.png" class="icon"> Home
+        <button onclick="navigateTo('backend/user-profile.php')">
+            <img src="components/icons/profile.png" class="icon"> Profile
         </button>
     </div>
     <div class="nav-right">
-        <button onclick="navigateTo('../templates/index.html')">
-            <img src="../components/icons/signout.png" class="icon"> Sign out
+        <button onclick="navigateTo('Templates/Index.html')">
+            <img src="components/icons/signout.png" class="icon"> Sign out
         </button>
     </div>
 </nav>
 
 <main>
-    <h2>Performance Prediction</h2>
+    <div class="prediction-container">
+        <h2>📊 Performance Prediction Analysis</h2>
 
-    <div class="charts">
-        <canvas id="pieChart"></canvas>
-        <canvas id="lineChart"></canvas>
+            <!-- Main Prediction Score -->
+            <div id="mainPrediction" class="card main-prediction">
+                <h3>Predicted Score</h3>
+                <div id="scoreDisplay" class="score-display">--</div>
+                <div id="gradeDisplay" class="grade-display">--</div>
+                <div id="categoryDisplay" class="category-display">--</div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid-2">
+            <div class="card">
+                <h4>Score Distribution</h4>
+                <canvas id="pieChart"></canvas>
+            </div>
+            <div class="card">
+                <h4>Performance Trend</h4>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Trend Analysis -->
+        <div class="grid-2">
+            <div class="card">
+                <h4>📈 Trend Analysis</h4>
+                <div id="trendAnalysis"></div>
+            </div>
+            <div class="card">
+                <h4>⚠️ Risk Assessment</h4>
+                <div id="riskAssessment"></div>
+            </div>
+        </div>
+
+        <!-- Next Semester Forecast -->
+        <div class="forecast-section">
+            <h4>🔮 Next Semester Forecast</h4>
+            <div id="forecastData" class="grid-2"></div>
+        </div>
+
+        <!-- Comparative Analysis -->
+        <div class="card">
+            <h4>📊 Comparative Analysis</h4>
+            <div id="comparativeAnalysis"></div>
+        </div>
+
+        <!-- Detailed Statistics -->
+        <div id="stats" class="card"></div>
     </div>
-
-    <div id="stats" class="stats-box"></div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../javascript/performance.js"></script>
+<script src="javascript/common.js"></script>
+<script src="javascript/advanced-prediction.js"></script>
+<script src="javascript/script.js"></script>
 <script>
-    analyzePerformance(); //  REQUIRED
+    // Load prediction data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        loadPredictionFromBackend();
+    });
 </script>
-<script src="../JavaScript/script.js"></script>
-
 </body>
 </html>

@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Performance Prediction</title>
-    <link rel="stylesheet" href="../Design/style.css">
+    <base href="/sppa/">
+    <link rel="stylesheet" href="Design/style.css">
 </head>
 <body>
     <nav>
         <div class="nav-left">
             <button onclick="navigateTo('Index.html')"> 
-                <img src="../components/icons/home.png" class="icon"> Home </button>
+                <img src="components/icons/home.png" class="icon"> Home </button>
 
         </div>
         <div class="nav-right">
-            <button onclick="navigateTo('register.html')">
-                <img src="../components/icons/register.png" class="icon">Register</button>
-            <button onclick="navigateTo('../Backend/login-page.php')">
-                <img src="../components/icons/login.png" class="icon">Login</button>
+            <button onclick="navigateTo('Templates/register.html')">
+                <img src="components/icons/register.png" class="icon">Register</button>
+            <button onclick="navigateTo('backend/login-page.php')">
+                <img src="components/icons/login.png" class="icon">Login</button>
     </div>
     </nav>
     
     <div id="header">
     <header>
-        <h1>  <img src="../components/icons/student.png" class="Logo">Student Performance Prediction System</h1>
+        <h1>  <img src="components/icons/student.png" class="Logo">Student Performance Prediction System</h1>
         <p>Analyze and predict student performance using advanced data insights. 
             Empower educators and students with actionable predictions.</p>
-        <button class="get-started" onclick="navigateTo('../Backend/login-page.php')"> 
-           <img src="../components/icons/login.png" class="icon"> Get Started</button>
+        <button class="get-started" onclick="navigateTo('backend/login-page.php')"> 
+           <img src="components/icons/login.png" class="icon"> Get Started</button>
     </header>
 </div>
     
@@ -52,10 +53,6 @@
             </div>
         </div>
     </section>
-         <div class="images">
-              <img src="../components/images/image1.png"  class="images">
-              <img src="../components/images/Graph2.jpg" class="images">
-        </div>
         <p class="context">
               Empower educational excellence through the power of data-driven insights. <br>
                     Our platform leverages advanced predictive modeling and real-time analytics to transform complex student data into actionable intelligence.
@@ -63,6 +60,6 @@
                      , optimize learning pathways, and ensure every student reaches their full academic potential.</p>
         
 
-    <script src="../JavaScript/script.js"></script>
+    <script src="javascript/script.js"></script>
 </body>
 </html>
