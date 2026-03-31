@@ -32,7 +32,9 @@
                 <div id="scoreDisplay" class="score-display">--</div>
                 <div id="gradeDisplay" class="grade-display">--</div>
                 <div id="categoryDisplay" class="category-display">--</div>
-        </div>
+            </div>
+
+        
 
         <!-- Charts Section -->
         <div class="grid-2">
@@ -73,17 +75,18 @@
         <!-- Detailed Statistics -->
         <div id="stats" class="card"></div>
     </div>
+     <!-- Export Buttons -->
+            <div class="export-section">
+                <button onclick="exportAsPDF()">Export as PDF</button>
+                <button onclick="exportAsImage()">Export as Image</button>
+            </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="javascript/common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="javascript/advanced-prediction.js"></script>
 <script src="javascript/script.js"></script>
-<script>
-    // Load prediction data on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        loadPredictionFromBackend();
-    });
-</script>
+<script src="javascript/prediction-export.js"></script>
 </body>
 </html>

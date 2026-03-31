@@ -22,16 +22,10 @@
             <button type="submit">Login</button>
         </form>
          <p> Login as <a href="backend/login-page.php"><img src="components/icons/student.png" class="icon">Student</a> <p>
-        <div id="errorMessage" style="color:#b00;margin-top:10px"></div>
+        <div id="errorMessage"></div>
     </main>
 
     <script src="javascript/script.js"></script>
-    <script>
-        // Show error message when redirected with ?error=1
-        const params = new URLSearchParams(window.location.search);
-        if (params.get('error') === '1') {
-            document.getElementById('errorMessage').textContent = 'Invalid admin credentials.';
-        }
-    </script>
+    <script src="javascript/admin.js"></script>
 </body>
 </html>

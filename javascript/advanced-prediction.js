@@ -1,21 +1,22 @@
 // Load prediction data from backend
 function loadPredictionFromBackend() {
-    const params = new URLSearchParams(window.location.search);
-    const backendUrl = `backend/prediction.php?${params.toString()}`;
+    const backendUrl = `backend/prediction.php`;
 
     fetch(backendUrl)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 displayAllAnalysis(data);
+            } else if (data.error) {
+                document.getElementById('stats').innerHTML = `<p style="color: red; font-weight:bold;">${data.error}</p>`;
             } else {
                 document.getElementById('stats').innerHTML = '<p style="color: red;">Error loading prediction data.</p>';
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            // Fallback to client-side calculation
-            analyzePerformanceClient();
+            // Backend failed, show error
+            document.getElementById('stats').innerHTML = '<p style="color: red;">Unable to load prediction data. Please try again.</p>';
         });
 }
 
@@ -338,29 +339,3 @@ function getAdvancedRecommendations(data, score) {
 
     return recommendations.map(rec => `<p>• ${rec}</p>`).join('');
 }
-
-// Fallback client-side analysis
-function analyzePerformanceClient() {
-    const params = new URLSearchParams(window.location.search);
-    const data = {
-        lastMarks: parseFloat(params.get('lastMarks')) || 0,
-        lastAssignment: parseInt(params.get('lastAssignment')) || 0,
-        lastAttendence: parseFloat(params.get('lastAttendence')) || 0,
-        currentAttendence: parseFloat(params.get('currentAttendence')) || 0,
-        currentAssignment: parseInt(params.get('currentAssignment')) || 0,
-        studyHoursPerWeek: parseFloat(params.get('studyHoursPerWeek')) || 0,
-        previousGPA: parseFloat(params.get('previousGPA')) || 0
-    };
-
-    const score = calculatePredictionScore(data);
-    const grade = getGrade(score);
-
-    displayMainScore(grade);
-    renderPieChart(data, score);
-    renderLineChart(data, score);
-    displayDetailedStats(data, { score: score, ...grade });
-}
-
-// calculation moved to `javascript/common.js`
-
-// Note: `getGrade` moved to `javascript/common.js`

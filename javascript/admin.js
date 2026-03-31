@@ -1,6 +1,17 @@
 // Admin page JavaScript
 // Loads users, streams and handles filtering by stream.
 
+// Show error message when redirected with ?error=1
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('error') === '1') {
+        const errorDiv = document.getElementById('errorMessage');
+        if (errorDiv) {
+            errorDiv.textContent = 'Invalid admin credentials.';
+        }
+    }
+});
+
 async function fetchJSON(url) {
 	const res = await fetch(url);
 	if (!res.ok) throw new Error('Network response was not ok');

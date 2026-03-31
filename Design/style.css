@@ -336,6 +336,23 @@ footer {
             padding: 20px;
             background: #f9f9f9;
         }
+        .export-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .export-section button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+        .export-section button:hover {
+            background: #0056b3;
+        }
         .risk-high { color: #dc3545; }
         .risk-medium { color: #fd7e14; }
         .trend-up { color: #28a745; }
@@ -463,6 +480,22 @@ footer {
     background: #3a9ffd;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+}
+
+.btn-forgot {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-forgot:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+#errorMessage {
+    color: #b00;
+    margin-top: 10px;
 }
 
 /* Responsive */

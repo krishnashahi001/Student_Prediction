@@ -38,12 +38,23 @@
     </p>
 <?php endif; ?>
 
+<?php if (isset($_GET['success'])): ?>
+    <p style="color:green; font-weight:bold;">
+        <?php
+        if ($_GET['success'] === 'password_reset') {
+            echo "Password reset successfully. Please login.";
+        }
+        ?>
+    </p>
+<?php endif; ?>
+
         <form id="loginForm" action="backend/login.php" method="POST" autocomplete="off">
             <input name="roll" type="number" placeholder="Roll No." required>
             <input name="password" type="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
 
+       <p> <a href="backend/forgot-password.php">Forgot Password?</a> </p>
        <p> Login as <img src="components/icons/Admin.png" class="icon"> <a href="Templates/admin-login.html">Admin</a> </p>
     </main>
 

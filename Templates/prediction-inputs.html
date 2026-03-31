@@ -23,48 +23,29 @@
         <b>Enter data to predict Your Performance</b>
         <br>    
         <br>    
-        <form id="predictionForm">
+        <form id="predictionForm" action="backend/prediction.php" method="post">
            <label> Enter Past Score % : </label>
-           <input type="number" id="last-marks" placeholder="0.0" step="0.1" required>
-           <label> Enter Assignment Submitted in Last-Semester : </label>
-           <input type="number" id="last-assignment" placeholder="0" required>
+           <input type="number" name="lastMarks" id="last-marks" placeholder="0.0" step="0.1" min="0" max="100" required>
+           <label> Enter Assignment Submitted in Last-Semester (5-10): </label>
+           <input type="number" name="lastAssignment" id="last-assignment" placeholder="0" min="5" max="10" required>
            <label> Enter Percentage of Attendence in Last-Semester :  </label>
-           <input type="number" id="last-attendence" placeholder="0.0 " step="0.1" required>
+           <input type="number" name="lastAttendence" id="last-attendence" placeholder="0.0 " step="0.1" min="0" max="100" required>
            <label> Enter Current Semester Attendence Percentage : </label>
-           <input type="number" id="current-attendence" placeholder="0.0 " step="0.1" required>
-           <label> Enter Current Assignments Submitted : </label>
-           <input type="number" id="current-assignment" placeholder="0" required>
+           <input type="number" name="currentAttendence" id="current-attendence" placeholder="0.0 " step="0.1" min="0" max="100" required>
+           <label> Enter Current Assignments Submitted (5-10): </label>
+           <input type="number" name="currentAssignment" id="current-assignment" placeholder="0" min="5" max="10" required>
            <label> Weekly Study Hours (optional): </label>
-           <input type="number" id="study-hours" placeholder="0" step="0.1">
+           <input type="number" name="studyHoursPerWeek" id="study-hours" placeholder="0" step="0.1">
            <label> Previous GPA (optional, e.g., 0-10 or 0-4): </label>
-           <input type="number" id="previous-gpa" placeholder="0" step="0.1">
+           <input type="number" name="previousGPA" id="previous-gpa" placeholder="0" step="0.1">
            <label> Lab/Practical Score (0-100, optional): </label>
-           <input type="number" id="lab-score" placeholder="0" step="0.1" min="0" max="100">
-          <button type="button" onclick="submitPrediction()"><img src="components/icons/analyse.png" class="icon" >Analysis </button>
+           <input type="number" name="labScore" id="lab-score" placeholder="0" step="0.1" min="0" max="100">
+          <button type="submit"><img src="components/icons/analyse.png" class="icon" >Analysis </button>
         </form>
        </main>
     <script src="javascript/script.js"></script>
-    <script>
-        function submitPrediction() {
-            const lastMarks = document.getElementById('last-marks').value;
-            const lastAssignment = document.getElementById('last-assignment').value;
-            const lastAttendence = document.getElementById('last-attendence').value;
-            const currentAttendence = document.getElementById('current-attendence').value;
-            const currentAssignment = document.getElementById('current-assignment').value;
-            const studyHours = document.getElementById('study-hours').value;
-            const previousGPA = document.getElementById('previous-gpa').value;
+    <script src="javascript/prediction-inputs.js"></script>
 
-            const params = new URLSearchParams();
-            params.append('lastMarks', lastMarks);
-            params.append('lastAssignment', lastAssignment);
-            params.append('lastAttendence', lastAttendence);
-            params.append('currentAttendence', currentAttendence);
-            params.append('currentAssignment', currentAssignment);
-            params.append('studyHoursPerWeek', studyHours);
-            params.append('previousGPA', previousGPA);
 
-            window.location.href = `Templates/prediction.html?${params.toString()}`;
-        }
-    </script>
 </body>
 </html>

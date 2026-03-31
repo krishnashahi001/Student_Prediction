@@ -138,6 +138,7 @@ $display_password = '******';
         <div class="action-buttons">
         
             <button class="btn-action btn-predict" onclick="navigateTo('Templates/prediction-inputs.html')">Performance Prediction</button>
+            <button class="btn-action btn-forgot" onclick="navigateTo('backend/forgot-password.php')">Forgot Password</button>
         </div>
     </div>
 </main>
